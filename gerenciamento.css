@@ -1,0 +1,138 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Karla', sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #f8f9fa;
+  }
+  
+  header {
+    background-color: #0d5c75;
+    color: #fefcfb;
+    padding: 20px;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+  }
+  
+  .container {
+    flex: 1;
+    padding: 80px 20px 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 70vh;
+  }
+  
+  
+  
+  .cards {
+    display: flex;
+    justify-content: center;
+    text-decoration: none;
+    align-items: stretch; /* deixa os cards do mesmo tamanho */
+    gap: 50px;
+    flex-wrap: wrap; /* garante que seja responsivo */
+    max-width: 1000px;
+    margin: 0 auto;
+    text-decoration: none;
+     color: inherit;
+  }
+  
+  .card {
+    background-color: #fff;
+    border: 2px solid #0d5c75;
+    text-decoration: none;
+    border-radius: 8px;
+    padding: 30px 20px;
+    width: 260px; /* garante que os cards fiquem lado a lado */
+    height: 260px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+  
+  .card i {
+    font-size: 100px;
+    margin-bottom: 15px;
+    color: #0d5c75;
+  }
+  
+  
+  
+  .card:hover {
+    transform: scale(1.05);
+  }
+  
+  .card .icon {
+    color: #0d5c75;
+    margin-bottom: 10px;
+  }
+  
+  .card p {
+    color: #0d5c75;
+    font-weight: bold;
+    margin: 0;
+  }
+  
+
+    .voltar-container {
+        position: fixed;
+        bottom: 80px;
+        right: 30px;
+        z-index: 1000;
+      }
+      
+      .btn-voltar {
+        background-color: #0d5c75;
+        color: #fff;
+        border: none;
+        padding: 12px 20px;
+        font-size: 1rem;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+      }
+      
+      .btn-voltar:hover {
+        background-color: #1282a2;
+      }
+      
+      footer {
+        text-align: center;
+        padding: 20px;
+        background-color: #0d5c75;
+        color: #fff;
+        margin-top: 60px;
+      }
+      
+  
+  @media (max-width: 900px) {
+    .cards {
+      flex-direction: column;
+      gap: 20px;
+      align-items: center;
+    }
+  
+    .card {
+      width: 90%;
+      min-width: 220px;
+    }
+  
+    .btn-voltar {
+      width: 100%;
+      max-width: 300px;
+    }
+  }

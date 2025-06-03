@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clientes</title>
+  <link rel="stylesheet" href="clientes.css" />
+  <script defer src="clientes.js"></script>
+</head>
+<body class="clientes">
+
+  <header class="cabecalho-site">
+    <div class="logo-nav">Clientes</div>
+  </header>
+
+  <main>
+    <div class="clientes-container">
+      <div class="top-bar">
+        <input type="text" class="pesquisa" placeholder="Pesquisar cliente..." oninput="filtrarClientes()" />
+        <button class="btn-adicionar" onclick="abrirModal()">Adicionar novo cliente</button>
+      </div>
+
+      <div class="lista-clientes" id="listaClientes"></div>
+    </div>
+  </main>
+
+  <div class="voltar-container">
+    <button type="button" class="btn-voltar" onclick="window.location.href='gerenciamento.html'">Voltar</button>
+  </div>
+
+  <footer>
+    <p>© 2025 PlanWise. Todos os direitos reservados.</p>
+  </footer>
+
+  <!-- Modal de Cadastro de Cliente -->
+<div id="modalCliente" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="fecharModal()">&times;</span>
+    <h2 id="tituloModal">Cadastro de Clientes</h2>
+    <form id="formCadastroCliente" onsubmit="salvarCliente(event)">
+      <input type="text" id="nomeCliente" placeholder="Nome completo" required />
+      <input type="text" id="cpfCliente" placeholder="CPF" required />
+      <input type="email" id="emailCliente" placeholder="Email" required />
+      <input type="tel" id="telefoneCliente" placeholder="Telefone" required />
+      <input type="text" id="enderecoCliente" placeholder="Endereço" required />
+
+      <button type="submit">Confirmar</button>
+    </form>
+  </div>
+</div>
+
+</body>
+</html>

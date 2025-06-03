@@ -1,0 +1,384 @@
+@import url('https://fonts.googleapis.com/css2?family=Karla:wght@400;700&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body.clientes {
+  background-color: #fefcfb;
+  color: #0A1128;
+  font-family: 'Karla', sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.cabecalho-site {
+  background-color: #0d5c75;
+  padding: 15px 0;
+  text-align: center;
+  color: white;
+  font-size: 32px;
+  font-weight: bold;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+main {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.clientes-container {
+  width: 100%;
+  max-width: 700px;
+  background-color: white;
+  border: 2px solid #1282a2;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 0 12px rgba(0,0,0,0.1);
+}
+
+.top-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+  justify-content: space-between;
+}
+
+.pesquisa {
+  flex: 1;
+  padding: 12px 16px;
+  border: 2px solid #ccc;
+  border-radius: 40px;
+  font-size: 16px;
+}
+
+.btn-adicionar {
+  padding: 12px 20px;
+  background-color: transparent;
+  border: 2px solid #ccc;
+  border-radius: 40px;
+  color: #0A1128;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-adicionar:hover {
+  background-color: #0d5c75;
+  color: white;
+  transform: scale(1.02);
+}
+
+.lista-clientes .cliente {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+}
+
+.cliente-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: #eaf4f8;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.cliente-detalhes {
+  display: none;
+  padding: 20px;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.cliente-detalhes table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.cliente-detalhes th,
+.cliente-detalhes td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.cliente-botoes {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.cliente-botoes button {
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+/* Botão editar amarelo ouro */
+.cliente-botoes .editar,
+.btn-editar {
+  background-color: #FFD700;
+  color: black;
+}
+
+.cliente-botoes .editar:hover,
+.btn-editar:hover {
+  background-color: #FFC300;
+  color: black;
+}
+
+/* Botão excluir vermelho vibrante */
+.cliente-botoes .excluir,
+.btn-excluir {
+  background-color: #FF4136;
+  color: white;
+}
+
+.cliente-botoes .excluir:hover,
+.btn-excluir:hover {
+  background-color: #E03025;
+}
+
+.voltar-container {
+  position: fixed;
+  bottom: 80px;
+  right: 30px;
+  z-index: 1000;
+}
+
+.btn-voltar {
+  background-color: #0d5c75;
+  color: #fff;
+  border: none;
+  padding: 12px 20px;
+  font-size: 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-voltar:hover {
+  background-color: #1282a2;
+}
+
+footer {
+  background-color: #0d5c75;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  font-size: 14px;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.5);
+}
+
+.modal-content {
+  background-color: #fff;
+  margin: 5% auto;
+  padding: 30px;
+  border: 2px solid #1282a2;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 0 12px rgba(0,0,0,0.2);
+  position: relative;
+}
+
+.modal-content h2 {
+  margin-bottom: 20px;
+}
+
+.modal-content input {
+  display: block;
+  width: 100%;
+  margin-bottom: 12px;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.modal-content button {
+  background-color: #0d5c75;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  width: 100%;
+  font-size: 16px;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.modal-content button:hover {
+  background-color: #1282a2;
+  transform: scale(1.02);
+}
+
+.modal .close {
+  position: absolute;
+  right: 20px;
+  top: 15px;
+  font-size: 28px;
+  font-weight: bold;
+  color: #333;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .top-actions {
+    flex-direction: column;
+    gap: 10px;
+    max-width: 100%;
+    padding: 0 20px;
+  }
+
+  .pesquisa, .btn-adicionar {
+    width: 100%;
+  }
+
+  .lista-clientes {
+    max-width: 100%;
+    padding: 0 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo-nav {
+    font-size: 24px;
+  }
+
+  .cliente-header {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .btn-voltar {
+    font-size: 0.85rem;
+    padding: 8px 12px;
+  }
+}
+
+/* Cliente Card */
+.cliente-card {
+  margin-top: 30px;
+  padding: 30px;
+  border: 2px solid #0d5c75;
+  border-radius: 12px;
+  background-color: #ffffff;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+}
+
+.cliente-card h2 {
+  text-align: center;
+  color: #0d5c75;
+  margin-bottom: 24px;
+}
+
+.cliente-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 30px;
+}
+
+.cliente-info .info-item {
+  background-color: #f9f9f9;
+  padding: 12px 16px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+.cliente-info .info-item.full {
+  grid-column: 1 / -1;
+}
+
+/* Adicionar Serviço */
+.adicionar-servico h3 {
+  text-align: center;
+  color: #0d5c75;
+  margin-bottom: 16px;
+}
+
+.adicionar-servico input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.adicionar-servico button {
+  background-color: #0d5c75;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  width: 100%;
+  margin-bottom: 20px;
+  transition: background-color 0.3s ease;
+}
+
+.adicionar-servico button:hover {
+  background-color: #1282a2;
+}
+
+/* Tabela de Serviços */
+.tabela-servicos {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.tabela-servicos th,
+.tabela-servicos td {
+  padding: 10px;
+  border: 1px solid #ccc;
+  text-align: left;
+}
+
+.tabela-servicos th {
+  background-color: #eaf4f8;
+}
+
+.remover-servico {
+  background-color: #FF4136;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.remover-servico:hover {
+  background-color: #E03025;
+}

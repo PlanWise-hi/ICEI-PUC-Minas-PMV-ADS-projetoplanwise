@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estoque e Serviços</title>
+    <link rel="stylesheet" href="produtoseserviços.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+  
+
+    <header class="cabecalho-site">
+        <div class="logo-nav">Estoque e Serviços</div>
+      </header>
+      
+    <main>
+        <section>
+            <h2>Cadastrar Produto</h2>
+            <form id="formProduto" class="form-inline mb-3">
+                <div class="form-group mb-2">
+                    <label for="nomeProduto" class="me-2">Nome</label>
+                    <input type="text" id="nomeProduto" class="form-control" required>
+                </div>
+                <div class="form-group mb-2 ms-3">
+                    <label for="quantidadeProduto" class="me-2">Quantidade</label>
+                    <input type="number" id="quantidadeProduto" class="form-control" required>
+                </div>
+                <div class="form-group mb-2 ms-3">
+                    <label for="precoProduto" class="me-2">Preço</label>
+                    <input type="number" step="0.01" id="precoProduto" class="form-control" required>
+                </div>
+                <div class="form-group mb-2 ms-3">
+                    <label for="custoProduto" class="me-2">Custo</label>
+                    <input type="number" step="0.01" id="custoProduto" class="form-control" required>
+                </div>
+                <div class="form-group mb-2 ms-3">
+                    <label for="tipoProduto" class="me-2">Tipo</label>
+                    <select id="tipoProduto" class="form-control" required>
+                        <option value="">Selecione</option>
+                        <option value="Kg">Kg</option>
+                        <option value="Unidade">Unidade</option>
+                        <option value="Litro">Litro</option>
+                    </select>
+                </div>
+                <button type="submit" id="btnProduto" class="btn btn-primary ms-3">Cadastrar Produto</button>
+            </form>
+            <button type="button" class="toggle-lista btn btn-outline-secondary mb-2" id="toggle-produtos">Mostrar/Esconder Produtos ▼</button>
+            <div id="produtos-container">
+                <h2>Produtos</h2>
+                <table id="tabela-produtos" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Quantidade</th>
+                            <th>Preço</th>
+                            <th>Custo</th>
+                            <th>Tipo</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="produtos-lista">
+                        <tr>
+                            <td colspan="6" id="produtos-vazio">Nenhum produto cadastrado.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        ...
+<section class="mt-5">
+    <h2>Cadastrar Serviço</h2>
+    <form id="formServico" class="form-inline mb-3">
+        <div class="form-group mb-2">
+            <label for="nomeServico" class="me-2">Nome</label>
+            <input type="text" id="nomeServico" class="form-control" required>
+        </div>
+        <div class="form-group mb-2 ms-3">
+            <label for="precoServico" class="me-2">Preço</label>
+            <input type="number" step="0.01" id="precoServico" class="form-control" required>
+        </div>
+        <div class="form-group mb-2 ms-3">
+            <label for="descricaoServico" class="me-2">Descrição</label>
+            <input type="text" id="descricaoServico" class="form-control" required>
+        </div>
+        <div class="form-group mb-2 ms-3">
+            <label for="duracaoServico" class="me-2">Duração (min)</label>
+            <input type="number" id="duracaoServico" class="form-control" min="1" required>
+        </div>
+        <button type="submit" id="btnServico" class="btn btn-primary ms-3">Cadastrar Serviço</button>
+    </form>
+    <button type="button" class="toggle-lista btn btn-outline-secondary mb-2" id="toggle-servicos">Mostrar/Esconder Serviços ▼</button>
+    <div id="servicos-container">
+        <h2>Serviços</h2>
+        <table id="tabela-servicos" class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Preço</th>
+                    <th>Descrição</th>
+                    <th>Duração (min)</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody id="servicos-lista">
+                <tr>
+                    <td colspan="5" id="servicos-vazio">Nenhum serviço cadastrado.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+...
+        <div class="voltar-container">
+    <button class="btn-voltar" onclick="window.location.href='gerenciamento.html'">Voltar</button>
+</div>
+    </main>
+    
+    <footer>
+        <p>&copy; 2025 PlanWise. Todos os direitos reservados.</p>
+      </footer>
+
+    <script src="produtoseserviços.js"></script>
+</body>
+
+</html>

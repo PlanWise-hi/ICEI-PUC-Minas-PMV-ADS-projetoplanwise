@@ -1,0 +1,182 @@
+@import url('https://fonts.googleapis.com/css2?family=Karla&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Karla', sans-serif;
+}
+
+
+body.homepage {
+  background-color: #FEFCFB;
+  color: #001F54;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.cabecalho-site {
+  background-color: #0d5c75;
+  padding: 15px 0;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  flex-shrink: 0;
+}
+
+.logo-nav {
+  color: white;
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.conteudo-principal {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  gap: 50px;
+  max-width: 1100px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.features {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.feature-card {
+  background-color: transparent;
+  text-align: center;
+  width: 280px;
+  text-decoration: none;
+  color: #001F54;
+  transition: transform 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: scale(1.05);
+}
+
+.icon-circle {
+  width: 120px;
+  height: 120px;
+  background-color: #E6EAF0;
+  border-radius: 50%;
+  margin: 0 auto 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 50px;
+  color: #0A1128;
+}
+
+.feature-card h2 {
+  margin-bottom: 10px;
+}
+
+.feature-card p {
+  font-size: 0.95em;
+  color: #034078;
+}
+
+.sobre {
+  background-color: #E6E8EB;
+  padding: 30px 20px;
+  text-align: center;
+  color: #001F54;
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  box-sizing: border-box;
+}
+
+.footer {
+  background-color: #0d5c75;
+  color: #FEFCFB;
+  text-align: center;
+  padding: 15px 0;
+  flex-shrink: 0;
+  margin-top: auto;
+}
+
+.botoes-topo {
+  position: fixed;
+  top: 85px;
+  right: 20px;
+  display: flex;
+  gap: 10px;
+  z-index: 1000;
+}
+
+
+
+
+.btn-sair {
+  background-color: #0d5c75;
+  color: #fff;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-sair:hover {
+  background-color: #1282A2;
+}
+
+ 
+
+
+.modal-conteudo {
+  background-color: #fff;
+  padding: 20px 30px;
+  border-radius: 10px;
+  text-align: center;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  position: relative;
+}
+
+.fechar {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 24px;
+  color: #034078;
+  cursor: pointer;
+}
+
+
+
+
+
+@media (max-width: 768px) {
+  .features {
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+  }
+
+  .feature-card {
+    width: 90%;
+  }
+
+  .botoes-topo {
+    flex-direction: column;
+    top: 10px;
+    right: 10px;
+  }
+}

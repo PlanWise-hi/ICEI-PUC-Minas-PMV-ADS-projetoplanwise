@@ -1,0 +1,271 @@
+@import url('https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Karla', sans-serif;
+}
+
+  body {
+    background-color: #f7f9fa;
+    color: #034078;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .cabecalho-site {
+    background-color: #0d5c75;
+    padding: 15px 0;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    flex-shrink: 0;
+  }
+  
+  .logo-nav {
+    color: white;
+    font-size: 32px;
+    font-weight: bold;
+  }
+  
+
+  .saldo, .resumo {
+    text-align: center;
+    margin: 1rem;
+  }
+
+  .valor-total {
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 0.5rem 0;
+  }
+
+  .resumo {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .box {
+    border: 1px solid #1282a2;
+    border-radius: 10px;
+    padding: 1rem;
+    min-width: 150px;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .box label {
+    display: block;
+    font-size: 0.9rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .box h3 {
+    font-size: 1.25rem;
+    font-weight: bold;
+  }
+
+  .date-range {
+    text-align: center;
+    margin: 1rem;
+  }
+
+  .date-range input {
+    padding: 0.4rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+  }
+
+  .date-range button {
+    padding: 0.4rem 1rem;
+    background-color: #1282a2;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-left: 0.5rem;
+  }
+
+  .add-button {
+    background-color: #0d5c75;
+  }
+
+  .transacoes {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+
+  .transacoes h4 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+  }
+
+  #listaTransacoes .item {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 1rem;
+    margin-bottom: 0.75rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  
+
+  .transacao {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #eee;
+    padding: 0.5rem 0;
+  }
+  
+  .transacao:last-child {
+    border-bottom: none;
+  }
+  
+  .transacao .negativo {
+    color: #e74c3c;
+  }
+  
+  .transacao .positivo {
+    color: #2ecc71;
+  }
+
+  .voltar-container {
+    position: fixed;
+    bottom: 80px;
+    right: 30px;
+    z-index: 1000;
+  }
+  
+  .btn-voltar {
+    background-color: #0d5c75;
+    color: #fff;
+    border: none;
+    padding: 12px 20px;
+    font-size: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .btn-voltar:hover {
+    background-color: #1282a2;
+  }
+
+  footer {
+    background-color: #0d5c75;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    margin-top: auto;
+  }
+
+ 
+ .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+  }
+  
+  .modal .form-container {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 12px;
+    max-width: 400px;
+    width: 90%;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  }
+  
+
+  .form-container input,
+  .form-container select {
+    width: 100%;
+    padding: 0.5rem;
+    margin: 0.5rem 0;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+  }
+
+  .form-container button {
+    padding: 0.5rem 1rem;
+    margin-top: 0.5rem;
+    margin-right: 0.5rem;
+    background-color: #1282a2;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+
+ 
+.transacao button {
+    padding: 0.4rem 1rem;
+    background-color: #1282a2;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+  }
+
+  .botoes-transacao {
+    display: flex;
+    gap: 0.5rem;
+  }
+  
+  .excluir-button {
+    padding: 0.4rem 1rem;
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+  }
+  
+  
+
+  @media (max-width: 768px) {
+    .resumo {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .date-range {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+  
+    .date-range input,
+    .date-range button {
+      width: 100%;
+    }
+  
+    .transacao {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.4rem;
+    }
+  
+    .transacao button {
+      align-self: flex-end;
+    }
+  
+    .form-container {
+      width: 100%;
+      max-width: 95%;
+    }
+  }
+  

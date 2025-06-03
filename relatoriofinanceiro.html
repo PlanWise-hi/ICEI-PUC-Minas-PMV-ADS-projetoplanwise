@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Relatório Financeiro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Karla:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="relatoriofinanceiro.css" />
+</head>
+
+<body>
+  <header class="cabecalho-site">
+    <div class="logo-nav">Relatório Financeiro</div>
+  </header>
+
+  <main>
+    <div class="resumo">
+      <div class="box">
+        <label>Entrada</label>
+        <h3 id="entrada">R$ 0,00</h3>
+      </div>
+      <div class="box">
+        <label>Saída</label>
+        <h3 id="saida">R$ 0,00</h3>
+      </div>
+      <div class="box">
+        <label>A Receber</label>
+        <h3 id="areceber">R$ 0,00</h3>
+      </div>
+    </div>
+
+    <div class="saldo">
+      <h2>Saldo em Contas</h2>
+      <div class="valor-total" id="saldo">R$ 0,00</div>
+    </div>
+
+    <div class="date-range">
+      <label>Exibir relatório:</label>
+      <input type="date" id="filtro-de" />
+      <span>à</span>
+      <input type="date" id="filtro-ate" />
+      <button id="filtro">Filtrar</button>
+      <button id="abrir-modal" class="add-button">Adicionar Transação</button>
+    </div>
+
+    <section class="transacoes">
+      <h4>Últimas transações</h4>
+      <div id="lista-transacoes"></div>
+    </section>
+
+    <div class="voltar-container">
+      <button class="btn-voltar" onclick="window.location.href='index-homepage.html'">Voltar</button>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 PlanWise. Todos os direitos reservados.</p>
+  </footer>
+
+
+
+  
+  <div id="modal" class="modal" style="display: none;">
+    <div class="form-container">
+      <form id="form-transacao">
+        <input type="date" id="data" required />
+        <input type="text" id="descricao" placeholder="Descrição" required />
+        <input type="number" id="valor" placeholder="Valor" required />
+        <select id="tipo">
+          <option value="entrada">Entrada</option>
+          <option value="saida">Saída</option>
+          <option value="areceber">A Receber</option>
+        </select>
+        <select id="metodoPagamento">
+          <option value="">Selecione</option>
+          <option value="Débito">Débito</option>
+          <option value="Crédito">Crédito</option>
+          <option value="Pix">Pix</option>
+          <option value="Dinheiro">Dinheiro</option>
+        </select>
+
+        <div class="fixa-container" style="display: flex; align-items: center; gap: 30px; margin-top: 10px;">
+          <label for="marcarFixa" style="margin: 0; display: flex; align-items: center;">
+            <input type="checkbox" id="marcarFixa" style="margin-right: 5px;" />
+            Despesa fixa
+          </label>
+          <input type="number" id="diaFixo" placeholder="Dia do mês (1-31)" min="1" max="31" style="display: none; width: 120px;" />
+        </div>
+
+        <button type="submit">Salvar</button>
+        <button type="button" id="fechar-modal">Cancelar</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="relatoriofinanceiro.js"></script>
+</body>
+</html>

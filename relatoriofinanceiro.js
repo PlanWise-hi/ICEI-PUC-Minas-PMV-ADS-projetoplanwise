@@ -1,4 +1,7 @@
-return data.toLocaleDateString('pt-BR', {
+// Funções auxiliares
+function formatarData(dataStr) {
+    const data = new Date(dataStr);
+    return data.toLocaleDateString('pt-BR', {
       day: '2-digit',
       month: '2-digit',
       year: 'numeric'
@@ -11,9 +14,6 @@ return data.toLocaleDateString('pt-BR', {
       currency: 'BRL'
     });
   }
-  
-
-
 
 
   function carregarTransacoes() {
@@ -23,8 +23,6 @@ return data.toLocaleDateString('pt-BR', {
   function salvarTransacoes(transacoes) {
     localStorage.setItem('transacoes', JSON.stringify(transacoes));
   }
-  
-
 
 
   function atualizarInterface(transacoes = carregarTransacoes()) {
@@ -66,9 +64,7 @@ return data.toLocaleDateString('pt-BR', {
     document.getElementById('saida').textContent = formatarValor(saida);
     document.getElementById('saldo').textContent = formatarValor(entrada - saida);
   }
-
-
-
+  
 
   function registrarDespesasFixasAte(ate) {
     const transacoes = carregarTransacoes();
@@ -109,9 +105,7 @@ return data.toLocaleDateString('pt-BR', {
     salvarTransacoes(transacoes);
   }
   
-
-
-
+ 
   function filtrarTransacoes(de, ate) {
     const transacoes = carregarTransacoes().filter(t => {
       const data = new Date(t.data);
@@ -120,8 +114,6 @@ return data.toLocaleDateString('pt-BR', {
     atualizarInterface(transacoes);
   }
   
-
-
 
   let indexEditando = null;
   
@@ -165,9 +157,7 @@ return data.toLocaleDateString('pt-BR', {
     document.getElementById('modal').style.display = 'none';
   });
   
-
-
-
+  // Abrir modal
   document.getElementById('abrir-modal').addEventListener('click', function () {
     indexEditando = null;
     document.getElementById('form-transacao').reset();
@@ -175,13 +165,13 @@ return data.toLocaleDateString('pt-BR', {
     document.getElementById('modal').style.display = 'flex';
   });
   
-
+  // Fechar modal
   document.getElementById('fechar-modal').addEventListener('click', function () {
     document.getElementById('modal').style.display = 'none';
     indexEditando = null;
   });
   
- 
+
   function editarTransacao(index) {
     const transacoes = carregarTransacoes();
     const t = transacoes[index];
@@ -198,8 +188,6 @@ return data.toLocaleDateString('pt-BR', {
   }
   
 
-
-
   function excluirTransacao(index) {
     if (confirm('Tem certeza que deseja excluir esta transação?')) {
       const transacoes = carregarTransacoes();
@@ -208,7 +196,6 @@ return data.toLocaleDateString('pt-BR', {
       atualizarInterface();
     }
   }
-
 
 
 
@@ -225,15 +212,12 @@ return data.toLocaleDateString('pt-BR', {
     filtrarTransacoes(de, ate);
   });
   
-
-
-
+  // Mostrar campo de dia fixo
   document.getElementById('marcarFixa').addEventListener('change', function () {
     document.getElementById('diaFixo').style.display = this.checked ? 'block' : 'none';
   });
   
-
-
-
+  // Inicialização
   atualizarInterface();
   
+

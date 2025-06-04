@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function () {
         return JSON.parse(localStorage.getItem('servicos')) || [];
     }
 
-    // Preencher select de serviços corretamente
+    // Preencher select de serviços
     const selectServico = document.getElementById('servicoCliente');
     function atualizarSelectServicos() {
         const servicos = getServicosCadastrados();
@@ -136,7 +136,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Formulário de agendamento
+    // FORMULÁRIO DE AGENDAMENTO
     document.getElementById('formAgendamento').addEventListener('submit', function (e) {
         e.preventDefault();
 
@@ -188,8 +188,15 @@ document.addEventListener('DOMContentLoaded', function () {
             servico: descricao
         };
 
+        // Salvar no localStorage do cliente
         eventosSalvos.push(evento);
         setAgendamentos(eventosSalvos);
+
+        // ✅ Salvar também no localStorage da empresa
+        let agendamentosEmpresa = JSON.parse(localStorage.getItem('agendamentos_empresa')) || [];
+        agendamentosEmpresa.push(evento);
+        localStorage.setItem('agendamentos_empresa', JSON.stringify(agendamentosEmpresa));
+
         atualizarCalendario();
 
         document.getElementById('mensagemSucesso').classList.remove('d-none');

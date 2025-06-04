@@ -214,7 +214,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (document.getElementById('btnGerarLink')) {
         document.getElementById('btnGerarLink').addEventListener('click', function () {
-            const link = `${window.location.origin}/planwiseTESTE/form-agendamento-cliente.html?usuario=${encodeURIComponent(usuario)}`;
+            const link = `${window.location.origin}/ICEI-PUC-Minas-PMV-ADS-projetoplanwise/form-agendamento-cliente.html?usuario=${encodeURIComponent(usuario)}`;
             const input = document.getElementById('linkCliente');
             input.value = link;
             input.select();

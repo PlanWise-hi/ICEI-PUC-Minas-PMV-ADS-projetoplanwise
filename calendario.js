@@ -1,9 +1,23 @@
 document.addEventListener('DOMContentLoaded', function () {
     // Identificador único do usuário
     let usuario = localStorage.getItem('usuario_id');
-    if (!usuario) {
-        usuario = '_' + Math.random().toString(36).substr(2, 9);
-        localStorage.setItem('usuario_id', usuario);
+
+// Verificar se há um ?usuario=ID na URL
+const params = new URLSearchParams(window.location.search);
+const idDaUrl = params.get('usuario');
+
+// Se houver ID na URL, sobrescreve o localStorage
+if (idDaUrl) {
+    usuario = idDaUrl;
+    localStorage.setItem('usuario_id', usuario);
+}
+
+// Se ainda não houver ID, cria um novo
+if (!usuario) {
+    usuario = '_' + Math.random().toString(36).substr(2, 9);
+    localStorage.setItem('usuario_id', usuario);
+}
+
     }
 
     function getAgendamentos() {

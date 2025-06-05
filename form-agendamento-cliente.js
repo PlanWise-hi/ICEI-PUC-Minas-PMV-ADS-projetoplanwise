@@ -17,6 +17,9 @@ document.addEventListener('DOMContentLoaded', function () {
     function getServicosCadastrados() {
         return JSON.parse(localStorage.getItem('servicos')) || [];
     }
+    function getAgendamentosEmpresa() {
+        return JSON.parse(localStorage.getItem('agendamentos_empresa')) || [];
+    }
 
     // Preencher select de serviços
     const selectServico = document.getElementById('servicoCliente');
@@ -35,106 +38,54 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     atualizarSelectServicos();
 
-    // Calendário
-    const calendarEl = document.getElementById('calendario');
-    let calendar = new FullCalendar.Calendar(calendarEl, {
-        initialView: 'dayGridMonth',
-        headerToolbar: {
-            left: 'prev,next today',
-            center: 'title',
-            right: 'dayGridMonth,timeGridWeek,timeGridDay'
-        },
-        locale: 'pt-br',
-        events: [],
-        eventClick: function (info) {
-            mostrarOverlayDoDia(info.event.startStr.split('T')[0]);
-        },
-        dateClick: function (info) {
-            mostrarOverlayDoDia(info.dateStr);
-        },
-        eventDidMount: function (info) {
-            info.el.setAttribute('title', info.event.title);
+    // Filtrar horários disponíveis
+    function gerarHorariosDia() {
+        const horarios = [];
+        for (let h = 8; h < 18; h++) {
+            horarios.push(`${h.toString().padStart(2, '0')}:00`);
+            horarios.push(`${h.toString().padStart(2, '0')}:30`);
         }
-    });
-    calendar.render();
+        return horarios;
+    }
 
-    function atualizarCalendario() {
-        atualizarSelectServicos();
-        calendar.removeAllEvents();
-        getAgendamentos().forEach(evento => {
-            calendar.addEvent({
-                id: evento.id || gerarId(),
-                title: evento.nome,
-                start: `${evento.data}T${evento.hora}`,
-                servico: evento.servico
+    function carregarHorariosDisponiveis(dataSelecionada, servicoSelecionado) {
+        const horarios = gerarHorariosDia();
+        const eventos = getAgendamentosEmpresa().filter(ev => ev.data === dataSelecionada);
+        const servicos = getServicosCadastrados();
+        const duracaoServico = servicos.find(s => s.nome === servicoSelecionado)?.duracao || 30;
+
+        const horariosDisponiveis = horarios.filter(hora => {
+            const inicioNovo = new Date(`${dataSelecionada}T${hora}`);
+            const fimNovo = new Date(inicioNovo.getTime() + duracaoServico * 60000);
+
+            return !eventos.some(ev => {
+                const duracaoEv = servicos.find(s => s.nome === ev.servico)?.duracao || 30;
+                const inicioEv = new Date(`${ev.data}T${ev.hora}`);
+                const fimEv = new Date(inicioEv.getTime() + duracaoEv * 60000);
+                return (inicioNovo < fimEv && fimNovo > inicioEv);
             });
         });
-    }
 
-    function excluirAgendamento(id, dateStr) {
-        let eventosSalvos = getAgendamentos();
-        eventosSalvos = eventosSalvos.filter(ev => (ev.id || ev.nome + ev.data + ev.hora) !== id);
-        setAgendamentos(eventosSalvos);
-        atualizarCalendario();
-        mostrarOverlayDoDia(dateStr);
-    }
-
-    function mostrarOverlayDoDia(dateStr) {
-        document.querySelectorAll('.fc-dia-overlay').forEach(el => el.remove());
-        const eventosDoDia = getAgendamentos().filter(ev => ev.data === dateStr);
-        const overlay = document.createElement('div');
-        overlay.className = 'fc-dia-overlay';
-        overlay.setAttribute('aria-modal', 'true');
-        overlay.setAttribute('role', 'dialog');
-        overlay.tabIndex = -1;
-        overlay.style = `
-            position: fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.5); z-index:9999;
-            display:flex; align-items:center; justify-content:center;
-        `;
-        overlay.innerHTML = `
-            <div class="fc-dia-overlay-content" style="background:#fff; border-radius:12px; padding:32px 24px; min-width:320px; max-width:90vw; max-height:80vh; overflow-y:auto; position:relative;" tabindex="0">
-                <button class="fc-dia-fechar" aria-label="Fechar janela" style="position:absolute; top:12px; right:18px; background:none; border:none; font-size:2rem; color:#1282A2; cursor:pointer;">&times;</button>
-                <h3>Agendamentos do dia ${dateStr.split('-').reverse().join('/')}</h3>
-                <ul style="margin-top:18px; padding-left:0; list-style:none;">
-                    ${
-                        eventosDoDia.length > 0
-                        ? eventosDoDia.map(ev => {
-                            const hora = ev.hora || '';
-                            const nome = ev.nome || '';
-                            const servico = ev.servico || '';
-                            const id = ev.id || (ev.nome + ev.data + ev.hora);
-                            return `<li class="mb-2" data-event-id="${id}">
-                                <span class="badge bg-primary">${hora}</span> <strong>${nome}</strong> <span class="text-muted">${servico}</span>
-                                <button class="btn btn-sm btn-danger btn-excluir ms-2" data-id="${id}" data-date="${dateStr}">Excluir</button>
-                            </li>`;
-                        }).join('')
-                        : '<li>Nenhum agendamento neste dia.</li>'
-                    }
-                </ul>
-            </div>
-        `;
-        document.body.appendChild(overlay);
-        overlay.querySelector('.fc-dia-overlay-content').focus();
-
-        overlay.querySelector('.fc-dia-fechar').onclick = () => overlay.remove();
-        overlay.addEventListener('click', function (e) {
-            if (e.target === overlay) overlay.remove();
-        });
-        overlay.addEventListener('keydown', function (e) {
-            if (e.key === 'Escape' || e.keyCode === 27) overlay.remove();
-        });
-
-        overlay.querySelectorAll('.btn-excluir').forEach(btn => {
-            btn.onclick = function () {
-                const id = this.getAttribute('data-id');
-                const date = this.getAttribute('data-date');
-                if (confirm('Deseja excluir este agendamento?')) {
-                    overlay.remove();
-                    excluirAgendamento(id, date);
-                }
-            };
+        const selectHora = document.getElementById('hora');
+        selectHora.innerHTML = '<option value="">Selecione</option>';
+        horariosDisponiveis.forEach(h => {
+            const opt = document.createElement('option');
+            opt.value = h;
+            opt.textContent = h;
+            selectHora.appendChild(opt);
         });
     }
+
+    document.getElementById('data').addEventListener('change', function () {
+        const data = this.value;
+        const servico = document.getElementById('servicoCliente').value;
+        if (data && servico) carregarHorariosDisponiveis(data, servico);
+    });
+    document.getElementById('servicoCliente').addEventListener('change', function () {
+        const servico = this.value;
+        const data = document.getElementById('data').value;
+        if (data && servico) carregarHorariosDisponiveis(data, servico);
+    });
 
     // FORMULÁRIO DE AGENDAMENTO
     document.getElementById('formAgendamento').addEventListener('submit', function (e) {
@@ -145,14 +96,14 @@ document.addEventListener('DOMContentLoaded', function () {
         const hora = document.getElementById('hora').value;
         const descricao = document.getElementById('servicoCliente').value;
 
-        if (!nome || !data || !descricao) {
+        if (!nome || !data || !descricao || !hora) {
             alert('Preencha todos os campos obrigatórios.');
             return;
         }
 
         const hoje = new Date();
-        const dataSelecionada = new Date(data + (hora ? 'T' + hora : 'T00:00'));
-        hoje.setHours(0,0,0,0);
+        const dataSelecionada = new Date(data + 'T' + hora);
+        hoje.setHours(0, 0, 0, 0);
         if (dataSelecionada < hoje) {
             alert('Não é possível agendar para datas passadas.');
             return;
@@ -165,8 +116,8 @@ document.addEventListener('DOMContentLoaded', function () {
         const inicioNovo = new Date(`${data}T${hora}`);
         const fimNovo = new Date(inicioNovo.getTime() + duracao * 60000);
 
-        const eventosSalvos = getAgendamentos();
-        const conflito = eventosSalvos.some(ev => {
+        const eventosEmpresa = getAgendamentosEmpresa();
+        const conflito = eventosEmpresa.some(ev => {
             if (ev.data !== data) return false;
             const servicoEv = servicos.find(s => s.nome === ev.servico);
             const duracaoEv = servicoEv ? parseInt(servicoEv.duracao) : 30;
@@ -176,7 +127,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
         if (conflito) {
-            alert('Já existe um agendamento para este horário.');
+            alert('Este horário já está ocupado.');
             return;
         }
 
@@ -189,15 +140,13 @@ document.addEventListener('DOMContentLoaded', function () {
         };
 
         // Salvar no localStorage do cliente
+        const eventosSalvos = getAgendamentos();
         eventosSalvos.push(evento);
         setAgendamentos(eventosSalvos);
 
-        // ✅ Salvar também no localStorage da empresa
-        let agendamentosEmpresa = JSON.parse(localStorage.getItem('agendamentos_empresa')) || [];
-        agendamentosEmpresa.push(evento);
-        localStorage.setItem('agendamentos_empresa', JSON.stringify(agendamentosEmpresa));
-
-        atualizarCalendario();
+        // Salvar também no localStorage da empresa
+        eventosEmpresa.push(evento);
+        localStorage.setItem('agendamentos_empresa', JSON.stringify(eventosEmpresa));
 
         document.getElementById('mensagemSucesso').classList.remove('d-none');
         this.reset();
@@ -220,7 +169,4 @@ document.addEventListener('DOMContentLoaded', function () {
             setTimeout(() => { this.textContent = 'Gerar link de agendamento do cliente'; }, 2000);
         });
     }
-
-    atualizarCalendario();
 });
-

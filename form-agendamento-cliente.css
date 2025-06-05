@@ -149,4 +149,17 @@ footer {
   main {
     padding: 1rem 0.5rem;
   }
+  
+}#precoServico {
+    color: #198754;
+    padding: 0.5rem;
+    border-radius: 4px;
+    background-color: #f8f9fa;
+    margin-top: 0.5rem;
+    font-size: 1.1rem;
+    transition: opacity 0.3s ease;
+}
+
+#precoServico.d-none {
+    display: none;
 }
